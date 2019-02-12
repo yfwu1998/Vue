@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-for循环中key属性的使用</title>
+    <script src="lib/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <label>
+        id:
+        <input type="text" v-model="id">
+    </label>
+
+    <label>
+        name:
+        <input type="text" v-model="name">
+    </label>
+
+    <input type="button" value="add" @click="add">
+
+    <!--注意： v-for循环的时候，key属性只能使用number或者string-->
+    <!--注意： key 在使用的时候，必须使用v-bind 属性搬到的形式，指定key的值-->
+    <!--在组件中，使用v-for循环的时候，或者在一些特殊情况中，如果 v-for 有问题，必须在使用
+    v-for 的同时，指定 唯一的 字符串/数字类型 :key值-->
+    <p v-for="studen in stu" :key="studen.id">
+        <input type="checkbox">
+        {{studen.id}}+++++{{ studen.name}}</p>
+</div>
+
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            name:'',
+            id: '',
+            stu:[
+                {id:1 ,name:"老大"},
+                {id:2 ,name:"老二"},
+                {id:3 ,name:"老三"},
+                {id:4 ,name:"老四"},
+                {id:5 ,name:"老五"},
+            ]
+        },
+        methods:{
+            add(){
+                this.stu.unshift({id:this.id,name:this.name});
+            }
+        }
+    })
+
+</script>
+</body>
+</html>

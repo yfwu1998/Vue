@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue中的样式 style</title>
+    <script src="lib/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--第一种使用方式，直接传递一个对象，对象就是无序键值对的集合，注意：这里的style需要使用 v-bind 做数据绑定 -->
+    <h1 :style="{'color': 'green','font-weight': 200}">你哈哈哈，实打实看到机会</h1>
+
+    <!--第二种使用方式，在data里引用-->
+    <h1 :style="styleObj">你哈哈哈，实打实看到机会</h1>
+
+    <!--第三种使用方式，在数组中使用-->
+    <h1 :style="[styleObj,styleObj2]">你哈哈哈，实打实看到机会</h1>
+
+</div>
+<script>
+    var vm = new Vue({
+        el: "#app",
+        data:{
+            styleObj: {'color': 'green','font-weight': 200},
+            styleObj2: {'font-style': 'italic'}
+        },
+        methods:{
+
+        }
+    })
+</script>
+</body>
+</html>

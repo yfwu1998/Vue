@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>过滤器的基本使用</title>
+
+    <script src="lib/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <p>{{ msg | msgFormat('天','123') | test}}</p>
+</div>
+<script>
+    // 过滤器的定义语法
+    // Vue。filter('过滤器名称', function(){})
+    // 过滤器中的 function ，第一个参数已经被规定死了，永远都是过滤器管道符( | ) 传递过来的数据
+
+    // 定义一个 Vue 全局的过滤器，名字叫做 msgFormat
+    // 过滤器内可传参，可以多个过滤器一起使用
+
+    Vue.filter('msgFormat', function (msg , arg , arg2) {
+
+        //字符串的 replace 方法，第一个参数，除了可写一个字符串之外，还可以定义一个正则
+        return msg.replace(/水/g,arg , arg2)
+    })
+
+    Vue.filter('test', function (msg) {
+        return msg + '**********'
+    })
+
+    var vm = new Vue({
+        el: '#app',
+        data:{
+            msg: '曾经沧海难为水，南水北调'
+        },
+        methods: {
+
+        }
+    })
+</script>
+</body>
+</html>

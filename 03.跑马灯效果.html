@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>跑马灯效果</title>
+    <script src="lib/vue.js"></script>
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <p v-cloak>+++{{msg}}++++</p>
+    <p v-text="msg">-++++</p>
+    <p v-html="msg2"></p>
+    <input type="button" value="123" :title="btn" @click="show">
+    <!--v-bind: 简写 ：绑定数据-->
+    <!--v-on: 简写 @ 绑定事件-->
+    <br><br>
+
+    <!--跑马灯-->
+    <input type="button" value="跑" @click="run">
+    <input type="button" value="停" @click="stop">
+    <H1>{{pmd}}</H1>
+</div>
+<script>
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            msg: "21321",
+            btn: "按钮",
+            msg2 : "<h1> 123132 </h1>",
+            pmd : "猥琐发育，别浪！！",
+            intervarId : null
+        },
+        methods: {
+            show:function () {
+                alert("Hello Vue");
+            },
+            run() {
+                if (this.intervarId != null) return;
+                this.intervarId = setInterval(() => {
+                    var start = this.pmd.substring(0,1);
+                    var end = this.pmd.substring(1);
+                    this.pmd = end + start;
+                },400)
+
+            },
+            stop(){
+              clearInterval(this.intervarId);
+              this.intervarId = null;
+            }
+        }
+    })
+</script>
+</body>
+</html>
