@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>路由-路由规则中定义参数</title>
+    <script src="lib/vue.js"></script>
+    <script src="lib/vue-router.js"></script>
+</head>
+<body>
+<div id="app">
+    <router-link to="/login?id=1&name=ls">登录</router-link>
+    <router-link to="/register/2/yfwu1998">注册</router-link>
+    <router-view></router-view>
+</div>
+<template id="login">
+    <div>
+        <h1>登录组件---{{ $route.query.id }}---{{ $route.query.name }}</h1>
+    </div>
+</template>
+<template id="register">
+    <h1>注册组件--{{$route.params.id}} -- {{$route.params.name}}</h1>
+</template>
+<script>
+    var login = {
+        template: '#login',
+        // data(){
+        //     return {
+        //         id:''
+        //     }
+        // },
+        // 组件的生命周期函数
+        create(){
+            console.log(this.$route)
+            var id = this.$route.query.id
+            console.log(id)
+            // this.id = id
+        }
+    }
+    var register = {
+        template: '#register',
+        created(){
+            console.log(this.$route.params.id)
+        }
+    }
+    var router = new VueRouter({
+        routes:[
+            {path:'/', redirect: 'login'},
+            {path: '/login', component: login},
+            {path: '/register/:id/:name', component: register}
+        ]
+    })
+    var vm = new Vue({
+        el: "#app",
+        data:{},
+        methods:{},
+        router
+    })
+</script>
+</body>
+</html>
